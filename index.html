@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Max — Student Developer</title>
+  <meta name="description" content="Max is a student interested in coding and building thoughtful software." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <style>
+    :root { --paper:#f4f0e8; --ink:#171717; --muted:#77746e; --blue:#315cff; --line:#d6d0c4; --lime:#d7f26b; }
+    * { box-sizing:border-box; }
+    html, body { max-width:100%; overflow-x:hidden; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:var(--paper); font-family:Manrope,system-ui,sans-serif; }
+    a { color:inherit; text-decoration:none; }
+    .wrap { width:min(1200px, calc(100% - 48px)); margin:auto; }
+    .nav { display:flex; align-items:center; justify-content:space-between; padding:24px 0; border-bottom:1px solid var(--line); }
+    .mark { font-weight:800; letter-spacing:-.08em; font-size:1.15rem; }
+    .navlinks { display:flex; gap:28px; font:500 12px 'DM Mono',monospace; text-transform:uppercase; letter-spacing:.08em; }
+    .navlinks a:hover { color:var(--blue); }
+    .menu { display:none; border:0; background:none; font:500 12px 'DM Mono'; text-transform:uppercase; }
+    .hero { min-height:620px; display:flex; flex-direction:column; justify-content:center; position:relative; padding:72px 0 110px; }
+    .eyebrow { font:500 11px 'DM Mono',monospace; letter-spacing:.11em; text-transform:uppercase; color:var(--blue); margin-bottom:25px; }
+    h1 { font-size:clamp(4rem, 10vw, 9.6rem); line-height:.87; letter-spacing:-.095em; margin:0; max-width:980px; font-weight:800; }
+    h1 em { font-family:'Playfair Display',serif; font-weight:600; letter-spacing:-.08em; }
+    .hero-foot { display:flex; justify-content:space-between; align-items:flex-end; margin-top:62px; border-top:1px solid var(--line); padding-top:18px; }
+    .intro { width:370px; font-size:15px; line-height:1.6; margin:0; }
+    .scroll { font:500 11px 'DM Mono'; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); }
+    .scroll span { color:var(--blue); font-size:18px; margin-left:12px; }
+    section { border-top:1px solid var(--line); padding:100px 0; }
+    .section-head { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:42px; }
+    h2 { font-size:clamp(2.2rem, 5vw, 4.8rem); line-height:.95; letter-spacing:-.07em; margin:0; }
+    .section-num { font:500 11px 'DM Mono'; color:var(--blue); }
+    .projects { display:grid; grid-template-columns:repeat(12, 1fr); gap:20px; }
+    .project { position:relative; min-height:370px; overflow:hidden; padding:28px; display:flex; flex-direction:column; justify-content:space-between; grid-column:span 7; background:#d8d3c9; }
+    .project:nth-child(2) { grid-column:span 5; background:#b7c8ef; min-height:500px; }
+    .project:nth-child(3) { grid-column:span 5; background:#d6e4aa; min-height:440px; }
+    .project:nth-child(4) { grid-column:span 7; background:#ded1d1; min-height:440px; }
+    .project::after { content:""; position:absolute; width:210px; height:210px; border-radius:50%; background:var(--blue); right:-35px; top:65px; opacity:.94; transition:transform .5s; }
+    .project:nth-child(2)::after { width:280px; height:280px; background:var(--ink); top:120px; right:-75px; }
+    .project:nth-child(3)::after { width:180px; height:180px; background:#ee7446; top:160px; right:28px; border-radius:10px; transform:rotate(20deg); }
+    .project:nth-child(4)::after { width:240px; height:240px; background:var(--lime); top:100px; right:80px; }
+    .project.image-project { background:#75c8ee; padding:0; }
+    .project.image-project::after { display:none; }
+    .project.image-project img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    .project.image-project::before { content:""; position:absolute; inset:0; z-index:1; background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.62)); }
+    .project.image-project .tag, .project.image-project .project-info { margin:28px; }
+    .project:hover::after { transform:scale(1.14) rotate(8deg); }
+    .project:nth-child(3):hover::after { transform:scale(1.14) rotate(28deg); }
+    .tag { position:relative; z-index:1; font:500 11px 'DM Mono'; text-transform:uppercase; letter-spacing:.08em; }
+    .project-info { position:relative; z-index:1; display:flex; justify-content:space-between; align-items:end; }
+    .project h3 { font-size:clamp(1.6rem, 3vw, 2.5rem); letter-spacing:-.07em; margin:0; }
+    .arrow { font-size:28px; }
+    .about-grid { display:grid; grid-template-columns:1fr 1.35fr; gap:80px; }
+    .about-copy { font-size:clamp(1.7rem, 3vw, 3rem); line-height:1.07; letter-spacing:-.065em; margin:0; }
+    .about-copy em { font-family:'Playfair Display'; color:var(--blue); }
+    .details { border-top:1px solid var(--line); }
+    .detail { display:flex; justify-content:space-between; gap:20px; padding:17px 0; border-bottom:1px solid var(--line); font-size:13px; }
+    .detail span { min-width:0; overflow-wrap:anywhere; }
+    .detail span:last-child { text-align:right; }
+    .detail span:first-child { color:var(--muted); font:500 11px 'DM Mono'; text-transform:uppercase; }
+    .contact { background:var(--blue); color:var(--paper); border:0; padding:100px 0 78px; }
+    .interest-card { display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:stretch; }
+    .interest-card img { width:100%; height:100%; min-height:280px; object-fit:cover; display:block; }
+    .interest-note { background:var(--lime); padding:34px; display:flex; flex-direction:column; justify-content:space-between; }
+    .interest-note h3 { font-size:clamp(2rem,4vw,4rem); line-height:.95; letter-spacing:-.08em; margin:0; }
+    .interest-note p { max-width:340px; font-size:14px; line-height:1.65; margin:34px 0 0; }
+    .contact h2 { max-width:750px; }
+    .contact h2 em { font-family:'Playfair Display'; }
+    .contact-row { display:flex; justify-content:space-between; align-items:end; margin-top:90px; border-top:1px solid rgba(244,240,232,.35); padding-top:18px; }
+    .contact-link { font-size:18px; border-bottom:1px solid var(--paper); padding-bottom:5px; }
+    footer { display:flex; justify-content:space-between; padding:20px 0; font:500 10px 'DM Mono'; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); }
+    @media (max-width:760px) { .wrap{width:min(100% - 32px,1200px)} .navlinks{display:none}.menu{display:block}.hero{min-height:570px;padding:55px 0 70px}.hero-foot{display:block}.intro{width:auto;max-width:380px}.scroll{margin-top:38px}.projects{display:block}.project,.project:nth-child(n){min-height:340px;margin-bottom:16px}.project-info{gap:15px}.project h3{max-width:75%}.about-grid{display:block}.about-copy{margin-bottom:55px}.interest-card{display:block}.interest-card img{min-height:220px}.interest-note{min-height:260px}.contact-row{display:block;margin-top:62px}.contact-row > div{max-width:100%;}.contact-link{display:inline-block;margin-top:22px;overflow-wrap:anywhere}.detail{align-items:flex-start;gap:12px}.detail span:first-child{flex:0 0 35%}.detail span:last-child{flex:1}section{padding:72px 0} }
+  </style>
+</head>
+<body>
+  <header class="wrap nav"><a class="mark" href="#top">M<span style="color:var(--blue)">.</span></a><nav class="navlinks"><a href="#work">Projects</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#contact">Contact</a></nav><span class="menu">Portfolio</span></header>
+  <main id="top">
+    <section class="wrap hero" style="border-top:0"><div class="eyebrow">Student developer / curious builder — open to opportunities</div><h1>Learning to<br>build <em>better.</em></h1><div class="hero-foot"><p class="intro">Hi, I’m Max. I’m a student interested in coding, problem-solving, and creating useful things with technology.</p><div class="scroll">Scroll to explore <span>↓</span></div></div></section>
+    <section id="work"><div class="wrap"><div class="section-head"><h2>Selected work</h2><div class="section-num">01 / 04</div></div><div class="projects">
+      <a class="project image-project" href="#contact"><img src="max-game-project.jpg" alt="Pixel-art platform game project preview"><span class="tag">Personal project / Game prototype</span><div class="project-info"><h3>Game<br>prototype</h3><span class="arrow">↗</span></div></a>
+      <a class="project" href="#contact"><span class="tag">Project placeholder 02</span><div class="project-info"><h3>In the<br>works</h3><span class="arrow">↗</span></div></a>
+      <a class="project" href="#contact"><span class="tag">Project placeholder 03</span><div class="project-info"><h3>Next<br>build</h3><span class="arrow">↗</span></div></a>
+      <a class="project" href="#contact"><span class="tag">Project placeholder 04</span><div class="project-info"><h3>More to<br>come</h3><span class="arrow">↗</span></div></a>
+    </div></div></section>
+    <section id="about"><div class="wrap"><div class="section-head"><h2>A little about me</h2><div class="section-num">02 / 04</div></div><div class="about-grid"><div><p class="about-copy">I’m Max, a <em>computer science student</em> who enjoys turning ideas into working software.</p><p style="font-size:15px;line-height:1.7;color:var(--muted);max-width:520px;margin-top:28px">I’m developing a strong foundation in programming, computational thinking, and problem-solving. I know how to code in Python and C#, and I’m continuing to grow my skills by studying core computer science concepts and building projects of my own. I’m curious, persistent, and excited to learn from experienced engineers while contributing to meaningful work.</p></div><div class="details"><div class="detail"><span>Currently</span><span>Computer science student</span></div><div class="detail"><span>Programming</span><span>Python · C#</span></div><div class="detail"><span>Interested in</span><span>Software engineering & technology</span></div><div class="detail"><span>Looking for</span><span>Internships & early-career roles</span></div></div></div></div></section>
+    <section id="skills"><div class="wrap"><div class="section-head"><h2>Skills & interests</h2><div class="section-num">03 / 04</div></div><div class="about-grid"><p class="about-copy">A growing toolkit, with plenty more <em>on the way.</em></p><div class="details"><div class="detail"><span>Languages</span><span>Python · Java · JavaScript</span></div><div class="detail"><span>Tools</span><span>Git · GitHub · VS Code</span></div><div class="detail"><span>Interests</span><span>Web development · AI · problem-solving</span></div><div class="detail"><span>Learning</span><span>Algorithms, systems, and building projects</span></div></div></div></div></section>
+    <section><div class="wrap"><div class="section-head"><h2>Outside the code</h2><div class="section-num">04 / 05</div></div><div class="interest-card"><img src="personal-interest-dog.jpg" alt="Happy golden retriever outdoors"><div class="interest-note"><h3>Curious mind.<br>Good energy.</h3><p>A small glimpse at the lighter side of my portfolio. I believe curiosity, patience, and a positive attitude matter just as much when learning to build great things.</p></div></div></div></section>
+    <section id="contact" class="contact"><div class="wrap"><div class="section-head"><h2>Let’s connect<br>and build <em>together.</em></h2><div class="section-num" style="color:var(--lime)">05 / 05</div></div><div class="contact-row"><span>Recruiters and collaborators are welcome.</span><div><div class="contact-link">Max</div><a class="contact-link" href="mailto:maxduy@gmail.com">maxduy@gmail.com ↗</a><br><a class="contact-link" href="tel:123456789">123456789 ↗</a><br><a class="contact-link" href="#">GitHub profile ↗</a><br><a class="contact-link" href="#">LinkedIn profile ↗</a></div></div></div></section>
+  </main>
+  <footer class="wrap"><span>© 2026 Max</span><span>Student developer portfolio</span><span><a href="#top">Back to top ↑</a></span></footer>
+</body>
+</html>
